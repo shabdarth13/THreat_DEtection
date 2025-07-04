@@ -1,1 +1,6 @@
 # THreat_DEtection
+
+The main goal of this project is to develop an AI-powered cybersecurity threat detection system that proactively identifies phishing attempts and provides real-time cyber threat intelligence. The project combines Natural Language Processing (NLP) and machine learning techniques—specifically Random Forest and Support Vector Machine (SVM) models—to analyze email and text data for phishing characteristics and suspicious patterns.
+In addition to phishing detection, the system integrates real-time threat intelligence by collecting and aggregating data from publicly available APIs, including VirusTotal and Shodan .This multi-source integration allows for continuous monitoring of known vulnerabilities, leaked credentials, malicious IPs, and more.
+The project also includes the development of a user-friendly web interface that presents alerts, threat indicators, and detailed system reports. The dashboard enables cybersecurity teams or end-users to visualize ongoing threats, assess risk levels, and take timely action.
+By combining intelligent phishing detection with real-time threat feeds and an accessible interface, this system aims to enhance early warning capabilities, reduce the impact of cyberattacks, and support more informed decision-making in enterprise and personal cybersecurity environments.
