@@ -1,0 +1,93 @@
+#attack doesnot happen#
+{
+  "files_modified": ["file1.txt", "file2.doc"],
+  "encryption_attempts": [],
+  "mass_file_encryption": false,
+  "specific_file_extensions": false,
+  "targeted_encryption": false,
+  "network_propagation": false
+}
+
+#attack happen#
+
+{
+  "files_modified": ["file1.txt", "file2.doc", "file3.pdf"],
+  "encryption_attempts": ["file1.txt", "file2.doc", "file3.pdf", "file4.jpg", "file5.png", "file6.xls", "file7.ppt", "file8.pdf", "file9.txt", "file10.mp3", "file11.mp4"],
+  "mass_file_encryption": true,
+  "specific_file_extensions": true,
+  "targeted_encryption": false,
+  "network_propagation": false
+}
+
+
+# Phising emails #
+
+Subject: Urgent: Your Account Has Been Suspended – Action Required
+From: security@yourbank-secure.com
+To: [victim@example.com]
+Dear Valued Customer,
+We have detected suspicious activity in your bank account and, as a precaution, we have temporarily suspended access to your online banking.
+To restore access, please verify your identity by logging in through the secure link below:
+👉 Click here to restore your account
+If you do not verify your account within 24 hours, your account will be permanently locked for your protection.
+Thank you for choosing YourBank.
+YourBank Security Team
+www.yourbank.com
+
+
+
+
+
+# Not phising emails #
+
+Subject: Your Order Has Shipped! 📦
+From: shipping-updates@amazon.com
+To: [customer@example.com]
+Hi Alex,
+Great news! Your order #113-2983728-7293847 has shipped and is on its way.
+Estimated delivery date: Friday, May 17
+Shipping Address:
+123 Main Street
+Springfield, IL 62704
+Tracking Number: 1Z999AA10123456784
+Track your package
+What's in the box:
+1x Sony WH-1000XM5 Wireless Noise Cancelling Headphones
+1x USB-C Charging Cable
+Thank you for shopping with us.
+– The Amazon Team
+Visit Your Orders
+
+
+| IP Address        | Description                         |
+| ----------------- | ----------------------------------- |
+| `8.8.8.8`         | Google Public DNS                   |
+| `1.1.1.1`         | Cloudflare DNS                      |
+| `185.199.111.153` | GitHub IP                           |
+| `45.83.64.1`      | Suspicious IP (used in demos often) |
+| `23.227.38.65`    | Shopify IP                          |
+"148.72.88.25"
+
+
+
+'WweAwVsd24AOy0m14MuqYAGkSwVlMViR'
+'b2518908ad22445e9106592656b3db4e284e2f55bf1584b4061e1520e87b7bb4'
+
+<h2>TECHNOLOGIES USED</h2>
+  <ul>
+    <li>Python Flask for backend API</li>
+    <li>Hugging Face Transformers for spam classification</li>
+    <li>JavaScript & Canvas for interactive front-end</li>
+    <li>Custom phishing detection algorithms</li>
+    <li>Modern CSS for responsive UI</li>
+  </ul>
+
+
+
+
+
+
+
+
+
+
