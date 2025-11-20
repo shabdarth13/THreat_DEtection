@@ -6,7 +6,7 @@ import os
 
 class PhishingDetector:
     def __init__(self):
-       model_dir=r"C:\Users\acer\OneDrive\Desktop\threat-detection\app\models\bert_spam_classifier"
+       model_dir="app\models\bert_spam_classifier"
        self.tokenizer = DistilBertTokenizerFast.from_pretrained(model_dir)
        self.model = DistilBertForSequenceClassification.from_pretrained(model_dir)
 
@@ -22,3 +22,4 @@ class PhishingDetector:
             "prediction": "Phishing" if predicted_class == 1 else "Not Phishing",
             "confidence": confidence
         }
+
