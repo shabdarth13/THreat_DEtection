@@ -6,6 +6,7 @@
   <title>Contact - Threat Detection</title>
 
   <style>
+
     *{
       margin:0;
       padding:0;
@@ -59,86 +60,117 @@
 
     .hero p{
       color:#94a3b8;
-      max-width:800px;
+      max-width:850px;
       margin:auto;
       line-height:1.8;
       font-size:18px;
     }
 
     .container{
-      max-width:700px;
+      max-width:1200px;
       margin:auto;
-      padding:40px 30px 80px;
+      padding:40px 60px 80px;
+    }
+
+    .team-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:28px;
     }
 
     .member-card{
       background:#0f172a;
-      border:1px solid rgba(56,189,248,0.15);
-      border-radius:28px;
-      padding:45px;
+      border:1px solid rgba(56,189,248,0.1);
+      border-radius:24px;
+      padding:35px;
       text-align:center;
       transition:0.3s;
-      box-shadow:0 20px 50px rgba(56,189,248,0.08);
+      position:relative;
+      overflow:hidden;
     }
 
     .member-card:hover{
       transform:translateY(-6px);
       border-color:#38bdf8;
+      box-shadow:0 15px 40px rgba(56,189,248,0.08);
+    }
+
+    .member-card::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:4px;
+      background:linear-gradient(to right,#38bdf8,#2563eb);
+    }
+
+    .lead-card{
+      border:1px solid rgba(56,189,248,0.4);
+      box-shadow:0 15px 40px rgba(56,189,248,0.12);
+      transform:scale(1.02);
+    }
+
+    .lead-badge{
+      position:absolute;
+      top:15px;
+      right:15px;
+      background:#38bdf8;
+      color:#020617;
+      font-size:12px;
+      font-weight:700;
+      padding:6px 10px;
+      border-radius:999px;
     }
 
     .member-card img{
-      width:110px;
-      height:110px;
+      width:95px;
+      height:95px;
       border-radius:50%;
       margin-bottom:22px;
-      border:3px solid rgba(56,189,248,0.35);
-      background:#020617;
-      padding:8px;
+      border:3px solid rgba(56,189,248,0.2);
     }
 
     .member-card h2{
       color:#38bdf8;
-      margin-bottom:10px;
-      font-size:30px;
+      margin-bottom:8px;
+      font-size:26px;
     }
 
     .role{
-      color:#cbd5e1;
-      margin-bottom:20px;
-      font-size:17px;
-      font-weight:600;
-    }
-
-    .contact-box{
-      margin-top:22px;
-      background:#020617;
-      border:1px solid rgba(56,189,248,0.1);
-      border-radius:18px;
-      padding:20px;
-      text-align:left;
-    }
-
-    .contact-row{
-      display:flex;
-      justify-content:space-between;
-      gap:20px;
-      padding:12px 0;
-      border-bottom:1px solid rgba(148,163,184,0.12);
-      color:#cbd5e1;
-    }
-
-    .contact-row:last-child{
-      border-bottom:none;
-    }
-
-    .contact-row span:first-child{
       color:#94a3b8;
+      margin-bottom:18px;
+      font-size:15px;
+      line-height:1.6;
     }
 
-    .contact-row span:last-child{
-      font-weight:700;
+    .contact{
       color:#e2e8f0;
-      text-align:right;
+      margin-top:10px;
+      font-size:15px;
+      line-height:1.8;
+    }
+
+    .contact a{
+      color:#38bdf8;
+      text-decoration:none;
+    }
+
+    .skills{
+      margin-top:18px;
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .tag{
+      background:#020617;
+      border:1px solid rgba(56,189,248,0.15);
+      color:#cbd5e1;
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:13px;
     }
 
     .footer{
@@ -149,43 +181,29 @@
     }
 
     @media(max-width:900px){
+
       .navbar{
         flex-direction:column;
         gap:15px;
         padding:20px;
       }
 
-      .navbar nav{
-        text-align:center;
-      }
-
-      .navbar nav a{
-        margin:0 8px;
+      .container{
+        padding:20px;
       }
 
       .hero h1{
         font-size:40px;
       }
-
-      .member-card{
-        padding:30px 20px;
-      }
-
-      .contact-row{
-        flex-direction:column;
-        gap:5px;
-      }
-
-      .contact-row span:last-child{
-        text-align:left;
-      }
     }
+
   </style>
 </head>
 
 <body>
 
   <header class="navbar">
+
     <div class="logo">🛡 Threat Detection</div>
 
     <nav>
@@ -194,47 +212,102 @@
       <a href="/features">Features</a>
       <a href="/dashboard">Dashboard</a>
     </nav>
+
   </header>
 
   <section class="hero">
-    <h1>Contact Developer</h1>
+
+    <h1>Meet The Team</h1>
 
     <p>
-      This AI-powered cybersecurity threat detection platform is developed
-      and maintained as part of the CODE FORENSICS project.
+      The Threat Detection System was primarily designed and developed by 
+      <strong style="color:#38bdf8;">Shabdarth</strong> under the CODE FORENSICS team, 
+      focusing on AI-powered phishing detection, threat intelligence, 
+      website security posture analysis, and cyber risk scoring.
     </p>
+
   </section>
 
   <section class="container">
-    <div class="member-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="Shabdarth">
 
-      <h2>Shabdarth</h2>
+    <div class="team-grid">
 
-      <div class="role">Cybersecurity & AI Developer</div>
+      <!-- MAIN DEVELOPER -->
 
-      <div class="contact-box">
-        <div class="contact-row">
-          <span>Email id</span>
-          <span>shabdarthbindel@gmail.com</span>
+      <div class="member-card lead-card">
+
+        <div class="lead-badge">CORE DEVELOPER</div>
+
+        <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png">
+
+        <h2>Shabdarth</h2>
+
+        <div class="role">
+          Lead Developer • Cybersecurity & AI Engineer
         </div>
 
-        <div class="contact-row">
-          <span>Role</span>
-          <span>Machine Learning, Flask Backend, Threat Intelligence</span>
+        <div class="contact">
+          📧 shabdarth53@gmail.com
         </div>
 
-        <div class="contact-row">
-          <span>Project</span>
-          <span>Threat Detection System</span>
+        <div class="contact">
+          🌐 shabdarth.vercel.app
+        </div>
+
+        <div class="skills">
+          <span class="tag">Cybersecurity</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Threat Intelligence</span>
+          <span class="tag">Flask</span>
+          <span class="tag">NLP</span>
         </div>
 
       </div>
+
+      <!-- TEAM MEMBERS -->
+
+      <div class="member-card">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+
+        <h2>Shivani Negi</h2>
+
+        <div class="role">
+          Team Member
+        </div>
+
+      </div>
+
+      <div class="member-card">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png">
+
+        <h2>Deepak Tripathi</h2>
+
+        <div class="role">
+          Team Member
+        </div>
+
+      </div>
+
+      <div class="member-card">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/236/236832.png">
+
+        <h2>Piyusha</h2>
+
+        <div class="role">
+          Team Member
+        </div>
+
+      </div>
+
     </div>
+
   </section>
 
   <footer class="footer">
-    © 2026 Threat Detection System | CODE FORENSICS
+    © 2026 Threat Detection System | Developed by CODE FORENSICS
   </footer>
 
 </body>
