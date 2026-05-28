@@ -1,133 +1,400 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Threat Detection</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Threat Detection System</title>
+
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #fff;
-      color: #000;
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
-    .navbar {
-      background-color: #000;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 40px;
+
+    body{
+      font-family:'Segoe UI',sans-serif;
+      background:#020617;
+      color:#fff;
+      overflow-x:hidden;
     }
-    .navbar h1 {
-      font-size: 24px;
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.12), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(37,99,235,0.15), transparent 30%);
+      z-index:-1;
     }
-    .navbar nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 25px;
-      font-size: 16px;
+
+    .navbar{
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 60px;
+      background:rgba(2,6,23,0.85);
+      border-bottom:1px solid rgba(56,189,248,0.18);
+      position:sticky;
+      top:0;
+      backdrop-filter:blur(12px);
+      z-index:100;
     }
-    .hero {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 60px 80px;
+
+    .logo{
+      font-size:24px;
+      font-weight:700;
+      color:#38bdf8;
     }
-    .hero .text {
-      max-width: 600px;
+
+    .navbar nav a{
+      text-decoration:none;
+      color:#cbd5e1;
+      margin-left:25px;
+      font-weight:600;
+      transition:0.25s;
     }
-    .hero h2 {
-      font-size: 42px;
-      font-weight: bold;
-      margin-bottom: 20px;
+
+    .navbar nav a:hover{
+      color:#38bdf8;
     }
-    .hero p {
-      font-size: 18px;
-      margin-bottom: 30px;
+
+    .hero{
+      min-height:90vh;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:80px;
+      gap:50px;
     }
-    .hero button {
-      background-color: #000;
-      color: white;
-      padding: 12px 24px;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
+
+    .hero-text{
+      max-width:650px;
     }
-    .hero img {
-      max-width: 300px;
+
+    .hero-text h1{
+      font-size:62px;
+      line-height:1.1;
+      margin-bottom:24px;
+      background:linear-gradient(to right,#38bdf8,#60a5fa,#ffffff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
     }
-    .features {
-      display: flex;
-      justify-content: space-around;
-      padding: 40px 80px;
-      text-align: center;
+
+    .hero-text p{
+      color:#94a3b8;
+      font-size:19px;
+      line-height:1.8;
+      margin-bottom:35px;
     }
-    .features div {
-      width: 200px;
-      background: #f4f4f4;
-      padding: 20px;
-      border-radius: 8px;
-      transition: 0.3s ease;
+
+    .hero-buttons{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
     }
-    .features div:hover {
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+
+    .btn{
+      padding:14px 26px;
+      border:none;
+      border-radius:14px;
+      font-weight:700;
+      cursor:pointer;
+      transition:0.3s;
+      text-decoration:none;
+      display:inline-block;
     }
-    .features h3 {
-      margin: 10px 0;
-      font-size: 18px;
+
+    .btn-primary{
+      background:linear-gradient(135deg,#06b6d4,#2563eb);
+      color:white;
+      box-shadow:0 10px 30px rgba(37,99,235,0.3);
     }
-    .features p {
-      font-size: 14px;
-      color: #444;
+
+    .btn-secondary{
+      background:#0f172a;
+      border:1px solid #334155;
+      color:#e2e8f0;
     }
+
+    .btn:hover{
+      transform:translateY(-3px);
+    }
+
+    .hero-image{
+      position:relative;
+    }
+
+    .hero-image img{
+      width:420px;
+      max-width:100%;
+      border-radius:24px;
+      box-shadow:0 0 50px rgba(56,189,248,0.18);
+      border:1px solid rgba(56,189,248,0.2);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:20px;
+      padding:0 80px 70px;
+    }
+
+    .stat-card{
+      background:rgba(15,23,42,0.9);
+      border:1px solid rgba(56,189,248,0.12);
+      padding:28px;
+      border-radius:20px;
+      text-align:center;
+      transition:0.3s;
+    }
+
+    .stat-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 15px 40px rgba(56,189,248,0.08);
+    }
+
+    .stat-card h2{
+      font-size:40px;
+      color:#38bdf8;
+      margin-bottom:10px;
+    }
+
+    .stat-card p{
+      color:#94a3b8;
+    }
+
+    .features{
+      padding:70px 80px;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:50px;
+    }
+
+    .section-title h2{
+      font-size:42px;
+      margin-bottom:12px;
+    }
+
+    .section-title p{
+      color:#94a3b8;
+      max-width:700px;
+      margin:auto;
+      line-height:1.8;
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:25px;
+    }
+
+    .feature-card{
+      background:rgba(15,23,42,0.9);
+      border:1px solid rgba(56,189,248,0.12);
+      border-radius:22px;
+      padding:30px;
+      transition:0.3s;
+      cursor:pointer;
+    }
+
+    .feature-card:hover{
+      transform:translateY(-8px);
+      border-color:#38bdf8;
+      box-shadow:0 15px 40px rgba(56,189,248,0.1);
+    }
+
+    .feature-card img{
+      width:70px;
+      margin-bottom:20px;
+    }
+
+    .feature-card h3{
+      margin-bottom:14px;
+      color:#38bdf8;
+      font-size:24px;
+    }
+
+    .feature-card p{
+      color:#94a3b8;
+      line-height:1.7;
+    }
+
+    .footer{
+      text-align:center;
+      padding:35px;
+      border-top:1px solid rgba(56,189,248,0.1);
+      color:#64748b;
+      margin-top:50px;
+    }
+
+    @media(max-width:950px){
+
+      .hero{
+        flex-direction:column;
+        text-align:center;
+        padding:60px 30px;
+      }
+
+      .hero-buttons{
+        justify-content:center;
+      }
+
+      .navbar{
+        flex-direction:column;
+        gap:15px;
+        padding:20px;
+      }
+
+      .stats,
+      .features{
+        padding-left:25px;
+        padding-right:25px;
+      }
+
+      .hero-text h1{
+        font-size:46px;
+      }
+    }
+
   </style>
 </head>
+
 <body>
+
   <header class="navbar">
-    <h1>Threat Detection</h1>
+    <div class="logo">🛡 Threat Detection</div>
+
     <nav>
+      <a href="/">Home</a>
       <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/dashboard">Dashboard</a>
-      <a href="/start">Start</a>
       <a href="/features">Features</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/contact">Contact</a>
     </nav>
   </header>
 
   <section class="hero">
-    <div class="text">
-      <h2>Protect Your System</h2>
-      <p>Enhance your safety and prevent cyber attacks with our AI-powered detection tools and threat intelligence capabilities.</p>
+
+    <div class="hero-text">
+      <h1>AI Powered Cybersecurity Intelligence</h1>
+
+      <p>
+        Detect phishing emails, investigate suspicious IP addresses,
+        analyze cyber threats, and strengthen your digital security
+        using machine learning and real-time threat intelligence.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="/dashboard" class="btn btn-primary">
+          Launch Dashboard
+        </a>
+
+        <a href="/features" class="btn btn-secondary">
+          Explore Features
+        </a>
+      </div>
     </div>
-    <div class="image">
-      <img src="https://www.coresecurity.com/sites/default/files/2023-07/advanced-threat-detection.jpg" alt="Security Graphic">
+
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" alt="Cybersecurity">
     </div>
+
   </section>
 
-<section class="features">
-  <div onclick="location.href='/about'">
-    <img src="https://cdn-icons-png.flaticon.com/512/1034/1034131.png" width="48">
-    <h3>About</h3>
-    <p>Learn about our AI-driven approach to threat detection.</p>
-  </div>
-  <div onclick="location.href='/features'">
-    <img src="https://cdn-icons-png.flaticon.com/512/857/857681.png" width="48">
-    <h3>Features</h3>
-    <p>Explore phishing detection, threat intelligence APIs, and the dashboard.</p>
-  </div>
-  <div onclick="location.href='/dashboard'">
-    <img src="https://cdn-icons-png.flaticon.com/512/3142/3142711.png" width="48">
-    <h3>Start Securing</h3>
-    <p>Launch the detection system and stay secure.</p>
-  </div>
-  <div onclick="location.href='/contact'">
-    <img src="https://cdn-icons-png.flaticon.com/512/561/561188.png" width="48">
-    <h3>Team</h3>
-    <p>Meet the team behind CODE FORENSICS.</p>
-  </div>
-</section>
+  <section class="stats">
+
+    <div class="stat-card">
+      <h2>AI</h2>
+      <p>Machine Learning Powered Detection</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>24/7</h2>
+      <p>Continuous Threat Monitoring</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>VT</h2>
+      <p>VirusTotal Threat Intelligence</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>OSINT</h2>
+      <p>Shodan Intelligence Integration</p>
+    </div>
+
+  </section>
+
+  <section class="features">
+
+    <div class="section-title">
+      <h2>Security Features</h2>
+
+      <p>
+        Built for modern cybersecurity workflows with AI-driven
+        phishing detection, IP intelligence analysis, and
+        interactive security monitoring.
+      </p>
+    </div>
+
+    <div class="feature-grid">
+
+      <div class="feature-card" onclick="location.href='/about'">
+        <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png">
+
+        <h3>Threat Analysis</h3>
+
+        <p>
+          Analyze suspicious content using machine learning
+          and intelligent phishing classification.
+        </p>
+      </div>
+
+      <div class="feature-card" onclick="location.href='/dashboard'">
+        <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png">
+
+        <h3>Live Dashboard</h3>
+
+        <p>
+          Investigate IPs, scan emails, and view detailed
+          cyber threat intelligence reports.
+        </p>
+      </div>
+
+      <div class="feature-card" onclick="location.href='/features'">
+        <img src="https://cdn-icons-png.flaticon.com/512/2092/2092063.png">
+
+        <h3>Threat Intelligence</h3>
+
+        <p>
+          Integrated with VirusTotal and Shodan for
+          real-time global threat visibility.
+        </p>
+      </div>
+
+      <div class="feature-card" onclick="location.href='/contact'">
+        <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png">
+
+        <h3>CODE FORENSICS</h3>
+
+        <p>
+          Meet the team behind the AI-powered
+          cybersecurity threat detection platform.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer class="footer">
+    © 2026 Threat Detection System | Built by CODE FORENSICS
+  </footer>
 
 </body>
 </html>

@@ -1,117 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Welcome - Threat Detection</title>
+  <title>Start - Threat Detection</title>
+
   <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
 
-    .start-screen, .main-page {
-      height: 100vh;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transition: transform 1s ease-in-out;
+    body,html{
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      font-family:'Segoe UI',sans-serif;
+      background:#020617;
     }
 
-    .start-screen {
-      background: url('start.jpg') no-repeat center center/cover;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      color: white;
-      z-index: 2;
+    .background{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(rgba(2,6,23,0.75), rgba(2,6,23,0.92)),
+        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400&auto=format&fit=crop");
+      background-size:cover;
+      background-position:center;
+      z-index:-2;
     }
 
-    .overlay {
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      background-color: rgba(0,0,0,0.6);
-      top: 0;
-      left: 0;
-      z-index: 1;
+    .overlay{
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(37,99,235,0.2), transparent 30%);
+      z-index:-1;
     }
 
-    .content {
-      z-index: 2;
-      text-align: center;
+    .container{
+      width:100%;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:20px;
     }
 
-    .content h1 {
-      font-size: 42px;
-      margin-bottom: 20px;
+    .content{
+      max-width:900px;
+      animation:fadeIn 1.2s ease;
     }
 
-    .content p {
-      font-size: 18px;
-      margin-bottom: 30px;
+    .content h1{
+      font-size:72px;
+      line-height:1.1;
+      margin-bottom:25px;
+      background:linear-gradient(to right,#38bdf8,#ffffff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
     }
 
-    .btn {
-      padding: 12px 28px;
-      background-color: #fff;
-      color: #000;
-      font-weight: bold;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 16px;
+    .content p{
+      color:#cbd5e1;
+      font-size:20px;
+      line-height:1.9;
+      margin-bottom:40px;
     }
 
-    .main-page {
-      background-color: #f9f9f9;
-      transform: translateY(100%);
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
+    .buttons{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
     }
 
-    .main-page iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
+    .btn{
+      padding:15px 30px;
+      border:none;
+      border-radius:16px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:16px;
+      transition:0.3s;
+      text-decoration:none;
+      display:inline-block;
     }
 
-    .slide-up {
-      transform: translateY(-100%);
+    .btn-primary{
+      background:linear-gradient(135deg,#06b6d4,#2563eb);
+      color:white;
+      box-shadow:0 12px 35px rgba(37,99,235,0.35);
     }
+
+    .btn-secondary{
+      background:rgba(15,23,42,0.9);
+      border:1px solid rgba(56,189,248,0.15);
+      color:#e2e8f0;
+    }
+
+    .btn:hover{
+      transform:translateY(-4px);
+    }
+
+    .bottom-links{
+      margin-top:35px;
+    }
+
+    .bottom-links a{
+      color:#94a3b8;
+      text-decoration:none;
+      margin:0 14px;
+      font-weight:600;
+      transition:0.25s;
+    }
+
+    .bottom-links a:hover{
+      color:#38bdf8;
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @media(max-width:900px){
+
+      .content h1{
+        font-size:46px;
+      }
+
+      .content p{
+        font-size:18px;
+      }
+    }
+
   </style>
 </head>
+
 <body>
 
-  <!-- Start Screen -->
-  <div class="start-screen" id="startScreen">
-    <div class="overlay"></div>
+  <div class="background"></div>
+  <div class="overlay"></div>
+
+  <div class="container">
+
     <div class="content">
-      <h1>Secure Systems. Smarter Decisions.</h1>
-      <p>Real-time AI-based threat detection powered by Threat Intelligence and Machine Learning.</p>
-      <button class="btn" onclick="slideUp()">Get Started</button>
-      
+
+      <h1>Secure Systems.<br>Smarter Defense.</h1>
+
+      <p>
+        AI-powered cybersecurity platform for phishing detection,
+        IP threat intelligence, and intelligent cyber risk analysis.
+      </p>
+
+      <div class="buttons">
+
+        <a href="/dashboard" class="btn btn-primary">
+          Launch Dashboard
+        </a>
+
+        <a href="/features" class="btn btn-secondary">
+          Explore Features
+        </a>
+
+      </div>
+
+      <div class="bottom-links">
+
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+
+      </div>
+
     </div>
-  </div>
 
-  <!-- Main Page (Dashboard) -->
-  <div class="main-page" id="mainPage">
-    <iframe src="dashboard"></iframe>
   </div>
-
-  <script>
-    function slideUp() {
-      document.getElementById('startScreen').classList.add('slide-up');
-      document.getElementById('mainPage').style.transform = 'translateY(0%)';
-    }
-  </script>
 
 </body>
 </html>

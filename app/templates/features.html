@@ -1,105 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Features - Threat Detection</title>
+
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 40px;
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
-    h1 {
-      text-align: center;
-      font-size: 36px;
-      color: #222;
-      margin-bottom: 30px;
+
+    body{
+      font-family:'Segoe UI',sans-serif;
+      background:#020617;
+      color:white;
     }
-    .section {
-      max-width: 1000px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+    .navbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 60px;
+      background:rgba(2,6,23,0.92);
+      border-bottom:1px solid rgba(56,189,248,0.15);
     }
-    .section img {
-      width: 100%;
-      max-width: 300px;
-      display: block;
-      margin: 0 auto 20px;
+
+    .logo{
+      color:#38bdf8;
+      font-size:24px;
+      font-weight:700;
     }
-    .feature-box {
-      margin-bottom: 30px;
+
+    .navbar nav a{
+      text-decoration:none;
+      color:#cbd5e1;
+      margin-left:24px;
+      font-weight:600;
     }
-    .feature-box h2 {
-      font-size: 24px;
-      margin-bottom: 10px;
-      color: #333;
+
+    .navbar nav a:hover{
+      color:#38bdf8;
     }
-    .feature-box p {
-      font-size: 16px;
-      color: #555;
-      line-height: 1.6;
+
+    .hero{
+      text-align:center;
+      padding:80px 30px 40px;
     }
-    ul {
-      padding-left: 20px;
+
+    .hero h1{
+      font-size:50px;
+      margin-bottom:16px;
+      background:linear-gradient(to right,#38bdf8,#ffffff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
     }
-    li {
-      margin-bottom: 10px;
+
+    .hero p{
+      color:#94a3b8;
+      max-width:850px;
+      margin:auto;
+      line-height:1.8;
+      font-size:18px;
     }
+
+    .container{
+      max-width:1200px;
+      margin:auto;
+      padding:40px 60px 80px;
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:30px;
+    }
+
+    .feature-card{
+      background:#0f172a;
+      border:1px solid rgba(56,189,248,0.1);
+      border-radius:24px;
+      padding:35px;
+      transition:0.3s;
+    }
+
+    .feature-card:hover{
+      transform:translateY(-6px);
+      border-color:#38bdf8;
+      box-shadow:0 15px 40px rgba(56,189,248,0.08);
+    }
+
+    .feature-card img{
+      width:75px;
+      margin-bottom:22px;
+    }
+
+    .feature-card h2{
+      color:#38bdf8;
+      margin-bottom:16px;
+    }
+
+    .feature-card p{
+      color:#94a3b8;
+      line-height:1.8;
+    }
+
+    .goals{
+      margin-top:70px;
+      background:#0f172a;
+      border-radius:24px;
+      padding:45px;
+      border:1px solid rgba(56,189,248,0.1);
+    }
+
+    .goals h2{
+      color:#38bdf8;
+      margin-bottom:25px;
+      font-size:36px;
+    }
+
+    .goals ul{
+      padding-left:20px;
+    }
+
+    .goals li{
+      margin-bottom:16px;
+      color:#cbd5e1;
+      line-height:1.7;
+    }
+
+    .footer{
+      text-align:center;
+      padding:30px;
+      border-top:1px solid rgba(56,189,248,0.08);
+      color:#64748b;
+    }
+
+    @media(max-width:900px){
+
+      .navbar{
+        flex-direction:column;
+        gap:15px;
+        padding:20px;
+      }
+
+      .container{
+        padding:20px;
+      }
+
+      .hero h1{
+        font-size:40px;
+      }
+    }
+
   </style>
 </head>
+
 <body>
-  <h1>Key Features & Goals</h1>
-  <div class="section">
 
-    <div class="feature-box">
-      <div>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
-    <a href="/start">Start</a>
-    <a href="/dashboard">Dashboard</a>
+  <header class="navbar">
+
+    <div class="logo">🛡 Threat Detection</div>
+
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/contact">Contact</a>
+    </nav>
+
+  </header>
+
+  <section class="hero">
+
+    <h1>Platform Features</h1>
+
+    <p>
+      Advanced cybersecurity capabilities powered by machine learning,
+      real-time threat intelligence, and intelligent risk analysis.
+    </p>
+
+  </section>
+
+  <section class="container">
+
+    <div class="feature-grid">
+
+      <div class="feature-card">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png">
+
+        <h2>AI Phishing Detection</h2>
+
+        <p>
+          Uses NLP and machine learning to identify phishing emails,
+          suspicious communication, and malicious intent patterns.
+        </p>
+
+      </div>
+
+      <div class="feature-card">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/1148/1148130.png">
+
+        <h2>Threat Intelligence APIs</h2>
+
+        <p>
+          Integrated with VirusTotal and Shodan to provide
+          real-time threat analysis and OSINT intelligence.
+        </p>
+
+      </div>
+
+      <div class="feature-card">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/1011/1011322.png">
+
+        <h2>Interactive Dashboard</h2>
+
+        <p>
+          Professional dashboard to scan emails, investigate IPs,
+          review risk levels, and monitor cyber threats.
+        </p>
+
+      </div>
+
     </div>
-      <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" alt="AI Phishing Detection">
-      <h2>AI-Powered Phishing Detection</h2>
-      <p>
-        Our system uses advanced NLP techniques and machine learning algorithms like Random Forest and SVM to analyze email content and detect phishing attempts. By training on real-world datasets, it can effectively identify subtle signs of social engineering.
-      </p>
-    </div>
 
-  
+    <div class="goals">
 
-    <div class="feature-box">
-      <img src="https://cdn-icons-png.flaticon.com/512/1148/1148130.png" alt="Threat APIs">
-      <h2>Threat Intelligence APIs</h2>
-      <p>
-        We integrate with global threat intelligence platforms such as VirusTotal, Shodan, and HaveIBeenPwned (HIBP) to fetch real-time data on file hashes, IPs, domains, and email breaches — boosting the system’s awareness and response.
-      </p>
-    </div>
-
-    <div class="feature-box">
-      <img src="https://cdn-icons-png.flaticon.com/512/1011/1011322.png" alt="Dashboard">
-      <h2>Interactive Dashboard</h2>
-      <p>
-        A user-friendly web interface built with HTML, CSS and optionally React.js lets users monitor threats, upload files, scan inputs, and view API reports in one place — enhancing usability and visibility.
-      </p>
-    </div>
-
-    <div class="feature-box">
       <h2>Project Goals</h2>
+
       <ul>
-        <li>Build robust phishing detection using AI models</li>
-        <li>Implement real-time monitoring for ransomware behaviors</li>
-        <li>Integrate trusted external threat intelligence APIs</li>
-        <li>Develop a visually clear and functional user dashboard</li>
-        <li>Ensure the system works reliably on real-world test data</li>
-        <li>Deploy the solution on cloud platforms like AWS or GCP</li>
+        <li>Develop intelligent phishing detection using AI and NLP.</li>
+
+        <li>Integrate trusted threat intelligence APIs for real-time analysis.</li>
+
+        <li>Create a modern cybersecurity dashboard for threat monitoring.</li>
+
+        <li>Provide actionable recommendations and risk assessment.</li>
+
+        <li>Ensure scalability and cloud deployment compatibility.</li>
+
+        <li>Improve cyber awareness and proactive defense capabilities.</li>
       </ul>
+
     </div>
 
-  </div>
+  </section>
+
+  <footer class="footer">
+    © 2026 Threat Detection System | CODE FORENSICS
+  </footer>
+
 </body>
 </html>

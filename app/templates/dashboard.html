@@ -1,117 +1,787 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard - Threat Detection</title>
+
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f0f2f5;
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0f172a, #020617 60%);
+      color: #e5e7eb;
+      min-height: 100vh;
+    }
+
     .navbar {
-      background-color: #000;
-      color: white;
-      padding: 15px 40px;
+      padding: 18px 50px;
+      background: rgba(2, 6, 23, 0.9);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.25);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
     }
+
+    .navbar h1 {
+      font-size: 22px;
+      color: #38bdf8;
+    }
+
     .navbar a {
-      color: white;
-      margin-left: 20px;
+      color: #cbd5e1;
       text-decoration: none;
-      font-weight: bold;
+      margin-left: 22px;
+      font-weight: 600;
     }
+
+    .navbar a:hover {
+      color: #38bdf8;
+    }
+
     .container {
-      max-width: 1200px;
+      max-width: 1350px;
       margin: 40px auto;
       padding: 20px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    h2 {
+
+    .hero {
       text-align: center;
-      margin-bottom: 30px;
-    }
-    .section {
       margin-bottom: 40px;
     }
-    .section h3 {
-      margin-bottom: 10px;
+
+    .hero h2 {
+      font-size: 38px;
+      margin-bottom: 12px;
     }
-    textarea, input[type="text"] {
+
+    .hero p {
+      color: #94a3b8;
+      font-size: 17px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(390px, 1fr));
+      gap: 25px;
+    }
+
+    .panel {
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 0 30px rgba(14, 165, 233, 0.08);
+    }
+
+    .panel h3 {
+      color: #38bdf8;
+      margin-bottom: 12px;
+      font-size: 24px;
+    }
+
+    .panel p {
+      color: #94a3b8;
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    textarea,
+    input {
       width: 100%;
-      padding: 10px;
+      background: #020617;
+      color: #e5e7eb;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 15px;
+      outline: none;
       margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
     }
+
+    textarea:focus,
+    input:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.12);
+    }
+
     button {
-      padding: 10px 20px;
-      background-color: #000;
+      background: linear-gradient(135deg, #06b6d4, #2563eb);
       color: white;
       border: none;
-      border-radius: 5px;
+      padding: 13px 22px;
+      border-radius: 12px;
+      font-weight: 700;
       cursor: pointer;
+      transition: 0.25s;
     }
-    pre {
-      background: #f4f4f4;
-      padding: 10px;
-      border-radius: 5px;
-      overflow: auto;
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+    }
+
+    .result {
+      margin-top: 20px;
+    }
+
+    .result-card {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 18px;
+      padding: 20px;
+      margin-top: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .low {
+      background: rgba(34, 197, 94, 0.15);
+      color: #86efac;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+
+    .medium {
+      background: rgba(234, 179, 8, 0.15);
+      color: #fde68a;
+      border: 1px solid rgba(234, 179, 8, 0.4);
+    }
+
+    .high {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fecaca;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #1e293b;
+      padding: 10px 0;
+      gap: 20px;
+    }
+
+    .info-row span:first-child {
+      color: #94a3b8;
+      min-width: 130px;
+    }
+
+    .info-row span:last-child {
+      text-align: right;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .stat-box {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .stat-box strong {
+      display: block;
+      font-size: 24px;
+      color: #38bdf8;
+    }
+
+    .stat-box small {
+      color: #94a3b8;
+    }
+
+    .section-title {
+      margin-top: 24px;
+      margin-bottom: 10px;
+      color: #38bdf8;
+      font-size: 20px;
+    }
+
+    .mini-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      background: #0f172a;
+      color: #cbd5e1;
+      border: 1px solid #334155;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+
+    .bad-tag {
+      border-color: rgba(239, 68, 68, 0.5);
+      color: #fecaca;
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    .good-tag {
+      border-color: rgba(34, 197, 94, 0.5);
+      color: #86efac;
+      background: rgba(34, 197, 94, 0.1);
+    }
+
+    .action-list {
+      margin-top: 12px;
+      padding-left: 20px;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+
+    .error {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fecaca;
+      padding: 14px;
+      border-radius: 12px;
+      margin-top: 15px;
+      word-break: break-word;
+    }
+
+    .loader {
+      color: #38bdf8;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    @media(max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 18px;
+      }
+
+      .navbar a {
+        margin-left: 10px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h2 {
+        font-size: 30px;
+      }
+
+      .info-row {
+        flex-direction: column;
+      }
+
+      .info-row span:last-child {
+        text-align: left;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="navbar">
-    <h1>Threat Detection Dashboard</h1>
-    <div>
+
+<header class="navbar">
+  <h1>🛡 Threat Detection Dashboard</h1>
+  <nav>
+    <a href="/">Home</a>
     <a href="/about">About</a>
-    <a href="/contact">Contact</a>
     <a href="/features">Features</a>
+    <a href="/contact">Contact</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <h2>AI Security Command Center</h2>
+    <p>Scan emails, IP addresses, and websites using ML, threat intelligence, and security posture checks.</p>
+  </section>
+
+  <section class="grid">
+
+    <div class="panel">
+      <h3>📧 Email Phishing Detection</h3>
+      <p>Paste suspicious email content. The AI model will classify it as phishing or safe.</p>
+
+      <textarea id="emailInput" rows="8" placeholder="Paste suspicious email text here..."></textarea>
+      <button onclick="checkPhishing()">Analyze Email</button>
+
+      <div id="phishingResult" class="result"></div>
     </div>
-  </div>
 
-  <div class="container">
-    <h2>Run Scans and Check Threats</h2>
+    <div class="panel">
+      <h3>🌐 IP Threat Intelligence</h3>
+      <p>Enter an IP address to check VirusTotal and Shodan intelligence.</p>
 
-    <div class="section">
-      <h3>Email Phishing Detection</h3>
-      <textarea id="emailInput" rows="5" placeholder="Paste suspicious email text here..."></textarea>
-      <button onclick="checkPhishing()">Check Email</button>
-      <pre id="phishingResult"></pre>
+      <input type="text" id="ipInput" placeholder="Example: 8.8.8.8"/>
+      <button onclick="checkIPThreat()">Investigate IP</button>
+
+      <div id="ipResult" class="result"></div>
     </div>
 
-    <div class="section">
-      <h3>IP Threat Intelligence</h3>
-      <input type="text" id="ipInput" placeholder="Enter IP address..." />
-      <button onclick="checkIPThreat()">Check IP</button>
-      <pre id="ipResult"></pre>
-    </div>
-  </div>
+    <div class="panel">
+      <h3>🔗 Website / Domain Intelligence</h3>
+      <p>Checks domain reputation, URL reputation, resolved IP, HTTPS, server exposure, and missing security headers.</p>
 
-  <script>
-    async function checkPhishing() {
-      const text = document.getElementById("emailInput").value;
-      const res = await fetch("http://localhost:5000/api/phishing", {
+      <input type="text" id="siteInput" placeholder="Example: demo.testfire.net or https://example.com"/>
+      <button onclick="checkWebsiteThreat()">Investigate Website</button>
+
+      <div id="siteResult" class="result"></div>
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+  function getRiskClass(riskLevel) {
+    if (!riskLevel) return "medium";
+
+    const risk = riskLevel.toLowerCase();
+
+    if (risk.includes("high")) return "high";
+    if (risk.includes("medium")) return "medium";
+
+    return "low";
+  }
+
+  function safe(value, fallback = "N/A") {
+    if (value === null || value === undefined || value === "") return fallback;
+    return value;
+  }
+
+  async function checkPhishing() {
+    const text = document.getElementById("emailInput").value.trim();
+    const resultDiv = document.getElementById("phishingResult");
+
+    if (!text) {
+      resultDiv.innerHTML = `<div class="error">Please paste email text first.</div>`;
+      return;
+    }
+
+    resultDiv.innerHTML = `<div class="loader">Analyzing email...</div>`;
+
+    try {
+      const res = await fetch("/api/phishing", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text })
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({text})
       });
+
       const data = await res.json();
-      document.getElementById("phishingResult").textContent = JSON.stringify(data, null, 2);
+
+      if (!res.ok || data.error) {
+        resultDiv.innerHTML = `<div class="error">${data.error || "Something went wrong."}</div>`;
+        return;
+      }
+
+      const prediction = data.result.prediction;
+      const confidence = data.result.confidence;
+      const badgeClass = prediction === "Phishing" ? "high" : "low";
+
+      resultDiv.innerHTML = `
+        <div class="result-card">
+          <span class="badge ${badgeClass}">${prediction}</span>
+
+          <div class="info-row">
+            <span>Confidence</span>
+            <span>${confidence}%</span>
+          </div>
+
+          <div class="info-row">
+            <span>Security Advice</span>
+            <span>
+              ${
+                prediction === "Phishing"
+                ? "Do not click links. Do not download attachments."
+                : "No strong phishing pattern detected."
+              }
+            </span>
+          </div>
+        </div>
+      `;
+    } catch (error) {
+      resultDiv.innerHTML = `<div class="error">${error.message}</div>`;
+    }
+  }
+
+  async function checkIPThreat() {
+    let ip = document.getElementById("ipInput").value.trim().replace(/\.$/, "");
+    const resultDiv = document.getElementById("ipResult");
+
+    if (!ip) {
+      resultDiv.innerHTML = `<div class="error">Please enter an IP address first.</div>`;
+      return;
     }
 
-    async function checkIPThreat() {
-      const ip = document.getElementById("ipInput").value;
-      const res = await fetch(`http://localhost:5000/api/threat-intel/${ip}`);
+    resultDiv.innerHTML = `<div class="loader">Collecting threat intelligence...</div>`;
+
+    try {
+      const res = await fetch(`/api/threat-intel/${ip}`);
       const data = await res.json();
-      document.getElementById("ipResult").textContent = JSON.stringify(data, null, 2);
+
+      if (!res.ok || data.error) {
+        resultDiv.innerHTML = `<div class="error">${data.error || "Threat lookup failed."}</div>`;
+        return;
+      }
+
+      resultDiv.innerHTML = renderIPReport(data);
+
+    } catch (error) {
+      resultDiv.innerHTML = `<div class="error">${error.message}</div>`;
     }
-  </script>
+  }
+
+  async function checkWebsiteThreat() {
+    const website = document.getElementById("siteInput").value.trim();
+    const resultDiv = document.getElementById("siteResult");
+
+    if (!website) {
+      resultDiv.innerHTML = `<div class="error">Please enter a website or domain first.</div>`;
+      return;
+    }
+
+    resultDiv.innerHTML = `<div class="loader">Analyzing website intelligence...</div>`;
+
+    try {
+      const res = await fetch("/api/site-intel", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({website})
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        resultDiv.innerHTML = `<div class="error">${data.error || "Website lookup failed."}</div>`;
+        return;
+      }
+
+      const riskClass = getRiskClass(data.risk_level);
+      const posture = data.security_posture || {};
+      const missingHeaders = posture.missing_headers || [];
+      const presentHeaders = posture.present_headers || [];
+
+      resultDiv.innerHTML = `
+        <div class="result-card">
+          <span class="badge ${riskClass}">${data.risk_level}</span>
+
+          <div class="info-row">
+            <span>Website</span>
+            <span>${safe(data.normalized_url)}</span>
+          </div>
+
+          <div class="info-row">
+            <span>Domain</span>
+            <span>${safe(data.domain)}</span>
+          </div>
+
+          <div class="info-row">
+            <span>Resolved IP</span>
+            <span>${safe(data.resolved_ip)}</span>
+          </div>
+
+          <div class="info-row">
+            <span>Risk Score</span>
+            <span>${safe(data.risk_score)}/100</span>
+          </div>
+
+          <div class="info-row">
+            <span>Verdict</span>
+            <span>${safe(data.verdict)}</span>
+          </div>
+
+          <div class="info-row">
+            <span>Recommendation</span>
+            <span>${safe(data.recommendation)}</span>
+          </div>
+
+          <h3 class="section-title">Risk Breakdown</h3>
+
+          <div class="stats">
+            <div class="stat-box">
+              <strong>${safe(data.risk_breakdown.domain_malicious, 0)}</strong>
+              <small>Domain Malicious</small>
+            </div>
+
+            <div class="stat-box">
+              <strong>${safe(data.risk_breakdown.url_malicious, 0)}</strong>
+              <small>URL Malicious</small>
+            </div>
+
+            <div class="stat-box">
+              <strong>${safe(data.risk_breakdown.resolved_ip_score, 0)}</strong>
+              <small>Resolved IP Score</small>
+            </div>
+
+            <div class="stat-box">
+              <strong>${safe(data.risk_breakdown.missing_security_headers, 0)}</strong>
+              <small>Missing Headers</small>
+            </div>
+          </div>
+
+          <h3 class="section-title">Domain Analysis</h3>
+
+          <div class="info-row">
+            <span>Registrar</span>
+            <span>${safe(data.domain_analysis.registrar)}</span>
+          </div>
+
+          <div class="info-row">
+            <span>Domain Reputation</span>
+            <span>${safe(data.domain_analysis.reputation, 0)}</span>
+          </div>
+
+          <div class="stats">
+            <div class="stat-box">
+              <strong>${safe(data.domain_analysis.harmless, 0)}</strong>
+              <small>Harmless</small>
+            </div>
+
+            <div class="stat-box">
+              <strong>${safe(data.domain_analysis.malicious, 0)}</strong>
+              <small>Malicious</small>
+            </div>
+
+            <div class="stat-box">
+              <strong>${safe(data.domain_analysis.suspicious, 0)}</strong>
+              <small>Suspicious</small>
+            </div>
+
+            <div class="stat-box">
+              <strong>${safe(data.domain_analysis.undetected, 0)}</strong>
+              <small>Undetected</small>
+            </div>
+          </div>
+
+          <h3 class="section-title">URL Analysis</h3>
+
+          <div class="info-row">
+            <span>Page Title</span>
+            <span>${safe(data.url_analysis.title)}</span>
+          </div>
+
+          <div class="info-row">
+            <span>Final URL</span>
+            <span>${safe(data.url_analysis.final_url)}</span>
+          </div>
+
+          <div class="stats">
+            <div class="stat-box">
+              <strong>${safe(data.url_analysis.harmless, 0)}</strong>
+              <small>Harmless</small>
+            </div>
+
+            <div class="stat-box">
+              <strong>${safe(data.url_analysis.malicious, 0)}</strong>
+              <small>Malicious</small>
+            </div>
+
+            <div class="stat-box">
+              <strong>${safe(data.url_analysis.suspicious, 0)}</strong>
+              <small>Suspicious</small>
+            </div>
+
+            <div class="stat-box">
+              <strong>${safe(data.url_analysis.undetected, 0)}</strong>
+              <small>Undetected</small>
+            </div>
+          </div>
+
+          <h3 class="section-title">Website Security Posture</h3>
+
+          <div class="info-row">
+            <span>HTTPS Used</span>
+            <span>${posture.https_used ? "Yes" : "No"}</span>
+          </div>
+
+          <div class="info-row">
+            <span>Status Code</span>
+            <span>${safe(posture.status_code)}</span>
+          </div>
+
+          <div class="info-row">
+            <span>Final URL</span>
+            <span>${safe(posture.final_url)}</span>
+          </div>
+
+          <div class="info-row">
+            <span>Server Header</span>
+            <span>${safe(posture.server)}</span>
+          </div>
+
+          <div class="info-row">
+            <span>Redirected</span>
+            <span>${posture.redirected ? "Yes" : "No"}</span>
+          </div>
+
+          <h3 class="section-title">Missing Security Headers</h3>
+
+          <div class="mini-tags">
+            ${
+              missingHeaders.length
+              ? missingHeaders.map(header => `<span class="tag bad-tag">${header}</span>`).join("")
+              : `<span class="tag good-tag">No missing critical headers detected</span>`
+            }
+          </div>
+
+          <h3 class="section-title">Present Security Headers</h3>
+
+          <div class="mini-tags">
+            ${
+              presentHeaders.length
+              ? presentHeaders.map(header => `<span class="tag good-tag">${header}</span>`).join("")
+              : `<span class="tag bad-tag">No checked security headers found</span>`
+            }
+          </div>
+
+          <h3 class="section-title">Resolved IP Intelligence</h3>
+
+          ${renderIPInner(data.ip_analysis)}
+
+          <h3 class="section-title">Recommended Action Plan</h3>
+
+          <ul class="action-list">
+            ${data.action_plan.map(item => `<li>${item}</li>`).join("")}
+          </ul>
+
+          ${
+            data.errors && (data.errors.domain || data.errors.url || data.errors.security_headers)
+            ? `<div class="error">
+                <strong>Warning:</strong><br>
+                ${data.errors.domain || ""}
+                ${data.errors.url || ""}
+                ${data.errors.security_headers || ""}
+              </div>`
+            : ""
+          }
+        </div>
+      `;
+    } catch (error) {
+      resultDiv.innerHTML = `<div class="error">${error.message}</div>`;
+    }
+  }
+
+  function renderIPReport(data) {
+    const riskClass = getRiskClass(data.risk_level);
+
+    return `
+      <div class="result-card">
+        <span class="badge ${riskClass}">${data.risk_level}</span>
+
+        <div class="info-row">
+          <span>IP Address</span>
+          <span>${safe(data.ip)}</span>
+        </div>
+
+        <div class="info-row">
+          <span>Risk Score</span>
+          <span>${safe(data.risk_score)}/100</span>
+        </div>
+
+        <div class="info-row">
+          <span>Verdict</span>
+          <span>${safe(data.verdict)}</span>
+        </div>
+
+        <div class="info-row">
+          <span>Recommendation</span>
+          <span>${safe(data.recommendation)}</span>
+        </div>
+
+        ${renderIPInner(data)}
+
+        <h3 class="section-title">Recommended Action Plan</h3>
+
+        <ul class="action-list">
+          ${data.action_plan.map(item => `<li>${item}</li>`).join("")}
+        </ul>
+
+        ${
+          data.errors && (data.errors.shodan || data.errors.virustotal)
+          ? `<div class="error">
+              <strong>Warning:</strong><br>
+              ${data.errors.shodan || ""}
+              ${data.errors.virustotal || ""}
+            </div>`
+          : ""
+        }
+      </div>
+    `;
+  }
+
+  function renderIPInner(data) {
+    return `
+      <h3 class="section-title">VirusTotal IP Analysis</h3>
+
+      <div class="stats">
+        <div class="stat-box">
+          <strong>${safe(data.virustotal.reputation, 0)}</strong>
+          <small>Reputation</small>
+        </div>
+
+        <div class="stat-box">
+          <strong>${safe(data.virustotal.harmless, 0)}</strong>
+          <small>Harmless</small>
+        </div>
+
+        <div class="stat-box">
+          <strong>${safe(data.virustotal.malicious, 0)}</strong>
+          <small>Malicious</small>
+        </div>
+
+        <div class="stat-box">
+          <strong>${safe(data.virustotal.suspicious, 0)}</strong>
+          <small>Suspicious</small>
+        </div>
+      </div>
+
+      <h3 class="section-title">Shodan Intelligence</h3>
+
+      <div class="info-row">
+        <span>ASN</span>
+        <span>${safe(data.shodan.asn)}</span>
+      </div>
+
+      <div class="info-row">
+        <span>Location</span>
+        <span>${safe(data.shodan.location)}</span>
+      </div>
+
+      <div class="info-row">
+        <span>Services</span>
+        <span>${data.shodan.services && data.shodan.services.length ? data.shodan.services.join(", ") : "None"}</span>
+      </div>
+
+      <div class="info-row">
+        <span>Domains</span>
+        <span>${data.shodan.domains && data.shodan.domains.length ? data.shodan.domains.join(", ") : "None"}</span>
+      </div>
+    `;
+  }
+</script>
+
 </body>
 </html>

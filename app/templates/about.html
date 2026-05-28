@@ -1,67 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About - Threat Detection</title>
+
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 40px;
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      background: white;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+
+    body{
+      font-family:'Segoe UI',sans-serif;
+      background:#020617;
+      color:#fff;
     }
-    h1 {
-      text-align: center;
-      font-size: 36px;
-      margin-bottom: 20px;
+
+    .navbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 60px;
+      background:rgba(2,6,23,0.92);
+      border-bottom:1px solid rgba(56,189,248,0.15);
+      position:sticky;
+      top:0;
+      z-index:100;
+      backdrop-filter:blur(10px);
     }
-    img {
-      display: block;
-      margin: 0 auto 20px;
-      max-width: 200px;
+
+    .logo{
+      color:#38bdf8;
+      font-size:24px;
+      font-weight:700;
     }
-    p {
-      font-size: 18px;
-      color: #333;
-      line-height: 1.6;
-      margin-bottom: 20px;
+
+    .navbar nav a{
+      color:#cbd5e1;
+      text-decoration:none;
+      margin-left:24px;
+      font-weight:600;
     }
-    ul {
-      padding-left: 20px;
+
+    .navbar nav a:hover{
+      color:#38bdf8;
     }
-    li {
-      margin-bottom: 10px;
-      font-size: 16px;
+
+    .hero{
+      padding:90px 60px 50px;
+      text-align:center;
     }
+
+    .hero h1{
+      font-size:52px;
+      margin-bottom:18px;
+      background:linear-gradient(to right,#38bdf8,#ffffff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero p{
+      color:#94a3b8;
+      max-width:850px;
+      margin:auto;
+      line-height:1.9;
+      font-size:18px;
+    }
+
+    .container{
+      max-width:1200px;
+      margin:auto;
+      padding:40px 60px 80px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:30px;
+      margin-top:50px;
+    }
+
+    .card{
+      background:#0f172a;
+      border:1px solid rgba(56,189,248,0.1);
+      border-radius:24px;
+      padding:35px;
+      transition:0.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:#38bdf8;
+      box-shadow:0 15px 40px rgba(56,189,248,0.08);
+    }
+
+    .card img{
+      width:70px;
+      margin-bottom:20px;
+    }
+
+    .card h2{
+      color:#38bdf8;
+      margin-bottom:16px;
+    }
+
+    .card p{
+      color:#94a3b8;
+      line-height:1.8;
+    }
+
+    .mission{
+      margin-top:70px;
+      background:#0f172a;
+      border-radius:28px;
+      padding:50px;
+      border:1px solid rgba(56,189,248,0.12);
+    }
+
+    .mission h2{
+      color:#38bdf8;
+      margin-bottom:20px;
+      font-size:36px;
+    }
+
+    .mission p{
+      color:#cbd5e1;
+      line-height:1.9;
+      font-size:17px;
+      margin-bottom:18px;
+    }
+
+    .footer{
+      text-align:center;
+      padding:30px;
+      color:#64748b;
+      border-top:1px solid rgba(56,189,248,0.08);
+    }
+
+    @media(max-width:900px){
+
+      .navbar{
+        flex-direction:column;
+        gap:15px;
+        padding:20px;
+      }
+
+      .hero{
+        padding:60px 25px;
+      }
+
+      .container{
+        padding:20px;
+      }
+
+      .hero h1{
+        font-size:40px;
+      }
+    }
+
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h2>About Our Threat Detection System</h2>
-    <img src="https://cdn-icons-png.flaticon.com/512/2645/2645897.png" alt="About Icon">
+
+  <header class="navbar">
+    <div class="logo">🛡 Threat Detection</div>
+
+    <nav>
+      <a href="/">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/features">Features</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+
+    <h1>About Our Cybersecurity Platform</h1>
+
     <p>
-      The Threat Detection System is an AI-driven platform designed to proactively secure users and systems from modern cyber threats. Developed by the CODE FORENSICS team, it combines artificial intelligence, machine learning, and threat intelligence APIs to monitor and detect phishing and suspicious cyber behavior in real time.
+      Threat Detection is an AI-powered cybersecurity platform
+      developed to identify phishing attacks, analyze suspicious
+      activity, and provide actionable threat intelligence using
+      modern machine learning and OSINT integrations.
     </p>
-    <p>
-      With cyberattacks becoming more sophisticated, this project was born out of a need to go beyond traditional security measures and offer a solution that's smarter, faster, and more integrated. Whether it's email phishing, threat analysis, or threat reporting, our platform covers it all.
-    </p>
-    <p><strong>Core Capabilities:</strong></p>
-    <ul>
-      <li>Advanced phishing detection using NLP + ML</li>
-      <li>Live threat feeds from VirusTotal, Shodan, and HIBP</li>
-      <li>Interactive dashboard with scan, upload, and report tools</li>
-      <li>Easy deployment via cloud (AWS/GCP)</li>
-    </ul>
-   
-  </div>
+
+  </section>
+
+  <section class="container">
+
+    <div class="grid">
+
+      <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+
+        <h2>AI Threat Detection</h2>
+
+        <p>
+          Uses machine learning and natural language processing
+          to identify phishing emails, suspicious patterns,
+          and malicious communication attempts.
+        </p>
+      </div>
+
+      <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1087/1087927.png">
+
+        <h2>Threat Intelligence</h2>
+
+        <p>
+          Integrated with VirusTotal and Shodan APIs to gather
+          global intelligence on IPs, services, domains,
+          and cyber risk indicators.
+        </p>
+      </div>
+
+      <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/4149/4149647.png">
+
+        <h2>Security Dashboard</h2>
+
+        <p>
+          Interactive dashboard allowing users to scan emails,
+          investigate threats, monitor risk levels,
+          and review actionable recommendations.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="mission">
+
+      <h2>Our Mission</h2>
+
+      <p>
+        Cyber threats continue to evolve rapidly, making
+        traditional security systems insufficient against
+        advanced phishing and social engineering attacks.
+      </p>
+
+      <p>
+        This platform was developed to combine artificial intelligence,
+        machine learning, and real-time threat intelligence
+        into a single security ecosystem capable of providing
+        faster and smarter cyber defense.
+      </p>
+
+      <p>
+        The system focuses on usability, intelligence-driven analysis,
+        and real-world applicability for modern cybersecurity environments.
+      </p>
+
+    </div>
+
+  </section>
+
+  <footer class="footer">
+    © 2026 Threat Detection System | CODE FORENSICS
+  </footer>
+
 </body>
 </html>
