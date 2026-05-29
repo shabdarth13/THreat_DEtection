@@ -9,4 +9,4 @@ app/.env
 venv/
 __pycache__/
 *.pyc
-app/models/bert_spam_classifier/model.safetensors
+
