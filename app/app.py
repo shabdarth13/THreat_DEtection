@@ -17,12 +17,8 @@ app = Flask(
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 
-try:
-    phishing_detector = PhishingDetector()
-    print("Phishing detector loaded successfully.")
-except Exception as e:
-    phishing_detector = None
-    print("Failed to load phishing detector:", e)
+# Lazy load phishing model
+phishing_detector = None
 
 
 try:
@@ -65,10 +61,7 @@ def features_html():
 
 @app.route("/api/phishing", methods=["POST"])
 def detect_phishing():
-    if phishing_detector is None:
-        return jsonify({
-            "error": "Phishing model is not loaded. Train the model first."
-        }), 500
+    global phishing_detector
 
     data = request.get_json(silent=True)
 
@@ -81,6 +74,10 @@ def detect_phishing():
         return jsonify({"error": "Missing or empty 'text' field"}), 400
 
     try:
+        if phishing_detector is None:
+            print("Loading phishing detector now...")
+            phishing_detector = PhishingDetector()
+
         result = phishing_detector.detect(email_text)
 
         return jsonify({
@@ -89,7 +86,9 @@ def detect_phishing():
         }), 200
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({
+            "error": f"Phishing detector failed: {str(e)}"
+        }), 500
 
 
 def clamp_score(score):
@@ -139,7 +138,6 @@ def calculate_ip_risk(vt_data, shodan_data):
         domains = []
 
     score = 0
-
     score += malicious * 18
     score += suspicious * 10
 
@@ -175,10 +173,12 @@ def calculate_website_risk(domain_data, url_data, ip_report, security_headers):
     ip_reputation = ip_vt.get("reputation", 0) or 0
 
     services = ip_shodan.get("services", [])
+
     if not isinstance(services, list):
         services = []
 
     missing_headers = security_headers.get("missing_headers", [])
+
     if not isinstance(missing_headers, list):
         missing_headers = []
 
@@ -248,7 +248,10 @@ def build_ip_report(ip_address, result):
         domains = []
 
     risk_score, risk_level = calculate_ip_risk(vt_data, shodan_data)
-    verdict, recommendation = build_verdict_and_recommendation(risk_level, "IP address")
+    verdict, recommendation = build_verdict_and_recommendation(
+        risk_level,
+        "IP address"
+    )
 
     return {
         "ip": ip_address,
@@ -432,6 +435,12 @@ def site_lookup_post():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+
+    app.run(
+        debug=False,
+        host="0.0.0.0",
+        port=port
+    )
