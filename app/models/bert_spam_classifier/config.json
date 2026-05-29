@@ -1,4 +1,5 @@
 {
+  "_name_or_path": "/workspaces/THreat_DEtection/app/models/bert_spam_classifier/checkpoint-2000",
   "activation": "gelu",
   "architectures": [
     "DistilBertForSequenceClassification"
@@ -19,6 +20,6 @@
   "sinusoidal_pos_embds": false,
   "tie_weights_": true,
   "torch_dtype": "float32",
-  "transformers_version": "4.51.3",
+  "transformers_version": "4.41.2",
   "vocab_size": 30522
 }

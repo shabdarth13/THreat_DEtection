@@ -45,8 +45,12 @@ print("Model save path:", CHECKPOINT_DIR)
 
 if not os.path.exists(DATASET_PATH):
     raise FileNotFoundError(f"Dataset not found at: {DATASET_PATH}")
-
-df = pd.read_csv(DATASET_PATH)
+    
+df = pd.read_csv(
+    DATASET_PATH,
+    engine="python",
+    on_bad_lines="skip"
+)
 
 required_columns = {"subject", "body", "label"}
 missing_columns = required_columns - set(df.columns)

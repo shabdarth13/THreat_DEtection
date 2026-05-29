@@ -1,0 +1,6 @@
+app/models/bert_spam_classifier/checkpoint-*/
+app/models/bert_spam_classifier/pytorch_model.bin
+app/models/bert_spam_classifier/checkpoint-*/
+app/models/bert_spam_classifier/model.safetensors
+app/models/bert_spam_classifier/pytorch_model.bin
+app/models/bert_spam_classifier/checkpoint-*/
